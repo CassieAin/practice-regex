@@ -26,9 +26,7 @@ public class MainController {
             try {
                 switch (view.viewInterface()) {
                     case 1:
-                        Checker recordCreator = new Checker(view);
-                        journal.addRecord(recordCreator.createRecord());
-                        view.printMessage(view.manager.getValue(RECORD_ADDED));
+                        view.changeLocale();
                         break;
                     case 2:
                         for (Record record : journal.getRecords()) {
@@ -37,7 +35,9 @@ public class MainController {
                         view.printMessage("\n");
                         break;
                     case 3:
-                        view.changeLocale();
+                        Checker checker = new Checker(view);
+                        journal.addRecord(checker.createRecord());
+                        view.printMessage(view.manager.getValue(RECORD_ADDED));
                         break;
                     case 4:
                         System.exit(0);

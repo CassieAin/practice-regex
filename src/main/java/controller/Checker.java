@@ -5,15 +5,20 @@ import services.ResourceManager;
 import model.Journal;
 import view.JournalView;
 
+import java.util.Scanner;
+
 import static view.constants.UserInterfaceConsts.InputConstants.*;
 import static view.constants.UserInterfaceConsts.RegexConstants.*;
 
 public class Checker {
     private JournalView view;
     private ResourceManager manager;
+    private Scanner scanner;
+
     public Checker(JournalView view){
         this.view = view;
         this.manager = view.manager;
+        scanner = new Scanner(System.in);
     }
 
     public Record createRecord(){
@@ -28,9 +33,14 @@ public class Checker {
     }
 
     public String checkString(String input, String regex){
-        if(checkRegexMatching(input,regex))
-            return input;
-        return "It does not match";
+        while (true) {
+            view.printMessage(input + " [" + regex + "]");
+            String inputString = scanner.nextLine();
+            if (checkRegexMatching(inputString, regex)) {
+                return inputString;
+            }
+            view.printMessage(view.manager.getValue(WRONG_INPUT_MESSAGE));
+        }
     }
 
     private boolean checkRegexMatching(String input, String regex){
