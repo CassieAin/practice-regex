@@ -1,6 +1,5 @@
 package services;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -10,7 +9,7 @@ public enum ResourceManager {
     private ResourceBundle resourceBundle;
     private final String resourceName = "text";
 
-    private ResourceManager(){
+    private ResourceManager()  {
         resourceBundle = ResourceBundle.getBundle(resourceName, Locale.getDefault());
     }
 
